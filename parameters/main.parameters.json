@@ -6,7 +6,7 @@
       "value": "ProjX"
     },
     "parEnvironmentPrefix": {
-      "value": "prod"
+      "value": "prd"
     },
     "parLocation": {
       "value": "northcentralus"
@@ -20,6 +20,9 @@
     "parSpokeNetworkAddressPrefix": {
       "value": "10.120.16.0/20"
     },
+    "paraddressPrefix": {
+      "value": "10.120.16.0/24"
+    },  
     "parTags": {
       "value": {
         "Owner": "Anton"
