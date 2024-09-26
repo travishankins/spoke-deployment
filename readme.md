@@ -31,7 +31,7 @@ The Resource Group must be created before deploying any other resources.
    New-AzSubscriptionDeployment `
      -Name $DeploymentNameRG `
      -Location "northcentralus" `
-     -TemplateFile "modules/resourceGroup.bicep" `
+     -TemplateFile "modules/createResourceGroup.bicep" `
      -TemplateParameterFile $ResourceGroupParams
    ```
 
@@ -63,3 +63,26 @@ Once the Resource Group has been created, proceed to deploy the networking resou
    **Result:** This will deploy the networking resources, apply resource locks, and assign the roles at the subscription level.
 
 ---
+
+## **Step 4: Deploy the Peering**
+
+Once the networking has been created, proceed to deploy the peering of resources.
+
+1. Run the following PowerShell command to deploy the networking resources, resource group lock, and role assignments:
+
+   ```powershell
+   # Define the parameters file path
+   $PeeringParams = "parameters/vnetPeering.json"
+
+   # Define the deployment name (use a unique timestamp)
+   $DeploymentNamePeer = "DeployPeerResources-$(Get-Date -Format 'yyyyMMddTHHmmss')"
+
+   # Deploy the Bicep file at the subscription level
+   New-AzSubscriptionDeployment `
+   -Name $DeploymentNamePeer `
+   -Location "northcentralus" `
+   -TemplateFile "createPeering.bicep" `
+   -TemplateParameterFile $PeeringParams
+   ```
+
+   **Result:** This will deploy the peering of virtual networks.
