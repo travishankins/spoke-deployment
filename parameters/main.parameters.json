@@ -8,21 +8,18 @@
     "parEnvironmentPrefix": {
       "value": "prd"
     },
+    "parResourceGroupName": {
+      "value": "ProjX-prd-rg-spoke-ncus"
+    },
     "parLocation": {
       "value": "northcentralus"
-    },
-    "parDisableBgpRoutePropagation": {
-      "value": false
-    },
-    "parDdosProtectionPlanId": {
-      "value": ""
     },
     "parSpokeNetworkAddressPrefix": {
       "value": "10.120.16.0/20"
     },
     "paraddressPrefix": {
       "value": "10.120.16.0/24"
-    },  
+    },
     "parTags": {
       "value": {
         "Owner": "Anton"
