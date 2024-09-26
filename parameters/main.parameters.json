@@ -1,0 +1,44 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "parProjectPrefix": {
+      "value": "ProjX"
+    },
+    "parLocation": {
+      "value": "northcentralus"
+    },
+    "parDisableBgpRoutePropagation": {
+      "value": false
+    },
+    "parDdosProtectionPlanId": {
+      "value": ""
+    },
+    "parSpokeNetworkAddressPrefix": {
+      "value": "10.11.0.0/16"
+    },
+    "parTags": {
+      "value": {
+        "Owner": "Anton"
+      }
+    },
+    "parResourceGroupLock": {
+      "value": {
+        "kind": "CanNotDelete",
+        "notes": "This lock ensures the resource group cannot be deleted."
+      }
+    },
+    "parSubscriptionOwnerPrincipalId": {
+      "value": "00000000-0000-0000-0000-000000000001"
+    },
+    "parAppOwnerPrincipalId": {
+      "value": "00000000-0000-0000-0000-000000000002"
+    },
+    "parSubscriptionOwnerRoleId": {
+      "value": "/providers/Microsoft.Authorization/roleDefinitions/00000000-0000-0000-0000-000000000003"
+    },
+    "parAppOwnerRoleId": {
+      "value": "/providers/Microsoft.Authorization/roleDefinitions/00000000-0000-0000-0000-000000000004"
+    }
+  }
+}
