@@ -5,6 +5,9 @@
     "parProjectPrefix": {
       "value": "ProjX"
     },
+    "parEnvironmentPrefix": {
+      "value": "prd"
+    },
     "parLocation": {
       "value": "northcentralus"
     },

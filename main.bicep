@@ -4,11 +4,21 @@ targetScope = 'subscription'
 @sys.description('Project name prefix to be added to all resource names.')
 param parProjectPrefix string
 
+@sys.description('Environment name prefix to be added to all virtual networks.')
+param parEnvironmentPrefix string
+
 @sys.description('The Azure Region to deploy the resources into.')
 param parLocation string
 
 @sys.description('Tags to apply to all resources in this module.')
 param parTags object
+
+@sys.description('CIDR for spoke network.')
+param parSpokeNetworkAddressPrefix string
+
+
+@sys.description('CIDR for spoke subnet.')
+param paraddressPrefix string
 
 @sys.description('Resource lock configuration for the resource group.')
 param parResourceGroupLock object = {
@@ -37,10 +47,12 @@ module networkingModule 'modules/deployInfrastructure.bicep' = {
   scope: resourceGroup(parResourceGroupName)  // Set the scope to the existing resource group
   params: {
     parProjectPrefix: parProjectPrefix
+    parEnvironmentPrefix: parEnvironmentPrefix
     parLocation: parLocation
     parTags: parTags
-    parSpokeNetworkAddressPrefix: '10.11.0.0/16'  // Example CIDR block for the vNet
-    parSpokeNetworkName: 'prd-vnet-spoke-ncus'
+    parSpokeNetworkAddressPrefix: parSpokeNetworkAddressPrefix
+    paraddressPrefix: paraddressPrefix
+    parSpokeNetworkName: 'vnet-spoke-ncus'
     parDnsServerIps: [
       '172.24.3.5','172.24.3.4'
     ]
@@ -55,6 +67,7 @@ module applyResourceGroupLock 'modules/applyResourceGroupLock.bicep' = {
   params: {
     parProjectPrefix: parProjectPrefix
     parResourceGroupLock: parResourceGroupLock
+    parEnvironmentPrefix: parEnvironmentPrefix
   }
 }
 

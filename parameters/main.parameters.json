@@ -5,6 +5,9 @@
     "parProjectPrefix": {
       "value": "ProjX"
     },
+    "parEnvironmentPrefix": {
+      "value": "prod"
+    },
     "parLocation": {
       "value": "northcentralus"
     },
@@ -15,7 +18,7 @@
       "value": ""
     },
     "parSpokeNetworkAddressPrefix": {
-      "value": "10.11.0.0/16"
+      "value": "10.120.16.0/20"
     },
     "parTags": {
       "value": {

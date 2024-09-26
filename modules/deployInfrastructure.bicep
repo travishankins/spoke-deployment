@@ -1,7 +1,10 @@
-// modules/networking.bicep
+// modules/deployInfrastructure.bicep
 
 @description('Project name prefix to be added to all resource names.')
 param parProjectPrefix string
+
+@description('Project name prefix to be added to all resource names.')
+param  parEnvironmentPrefix string
 
 @description('The Azure Region to deploy the resources into.')
 param parLocation string
@@ -12,8 +15,11 @@ param parTags object
 @description('Spoke network address prefix.')
 param parSpokeNetworkAddressPrefix string
 
+@description('Spoke subnet address CIDR.')
+param paraddressPrefix string
+
 @description('Spoke network name.')
-param parSpokeNetworkName string = 'prd-vnet-spoke-ncus'
+param parSpokeNetworkName string = 'vnet-spoke-ncus'
 
 @description('DNS Server IP addresses for the VNet.')
 param parDnsServerIps array
@@ -23,7 +29,7 @@ param parNextHopIpAddress string
 
 // ----- Virtual Network -----
 resource resSpokeVirtualNetwork 'Microsoft.Network/virtualNetworks@2023-02-01' = {
-  name: '${parProjectPrefix}-${parSpokeNetworkName}'
+  name: '${parProjectPrefix}-${parEnvironmentPrefix}-${parSpokeNetworkName}'
   location: parLocation
   tags: parTags
   properties: {
@@ -40,7 +46,7 @@ resource resSpokeVirtualNetwork 'Microsoft.Network/virtualNetworks@2023-02-01' =
 
 // ----- Route Table -----
 resource resSpokeToHubRouteTable 'Microsoft.Network/routeTables@2023-02-01' = {
-  name: '${parProjectPrefix}-rtb-ncus'
+  name: '${parProjectPrefix}-rt-ncus'
   location: parLocation
   tags: parTags
   properties: {
@@ -60,9 +66,9 @@ resource resSpokeToHubRouteTable 'Microsoft.Network/routeTables@2023-02-01' = {
 // ----- Subnet -----
 resource resSpokeSubnet 'Microsoft.Network/virtualNetworks/subnets@2023-02-01' = {
   parent: resSpokeVirtualNetwork
-  name: '${parProjectPrefix}-prd-snet-ncus-01'
+  name: '${parProjectPrefix}-${parEnvironmentPrefix}-snet-ncus-01'
   properties: {
-    addressPrefix: '10.11.1.0/24'
+    addressPrefix: paraddressPrefix
     routeTable: !empty(parNextHopIpAddress) ? {
       id: resSpokeToHubRouteTable.id
     } : null
